@@ -104,6 +104,46 @@ function validPartRx($str) {
 
 
 ?>
+
+<h4>Part 3: Data Validation using Javascript</h4>
+<label>Part Number: <input type="text" id="partNumber"></label> <br>
+<button id="btnCheckPart">Check Part Number</button> <br>
+
+<p id="result"></p> <!-- output element -->
+
+<script>
+    // grab elements
+    var button = document.getElementById("btnCheckPart"); // button
+    var txtPartNumber = document.getElementById("partNumber"); // text input
+    var txtResult = document.getElementById("result"); // output element
+
+    // attach event handler to button
+    button.onclick = fnCheck;
+
+    // Define check function
+    function fnCheck()
+    {
+        // Get the text box value
+        var partNumber = txtPartNumber.value;
+        if(validPartNumber(partNumber))
+            txtResult.innerHTML = "Valid!";
+        else
+            txtResult.innerHTML = "Not Valid!";
+    }
+
+    // Define validation function
+    function validPartNumber(partNumber)
+    {
+        var pattern = '^(HW)?(SG)?(AP)?-\\d{2}-\\w{4}$'; // do not include '/' delimiters for constructor
+        var regex = new RegExp(pattern, 'i'); // 'pattern', 'flags'
+
+        // search method returns -1 if not found
+        var n = partNumber.search(regex);
+        return n >= 0;
+    }
+
+</script>
+
 </body>
 
 </html>
